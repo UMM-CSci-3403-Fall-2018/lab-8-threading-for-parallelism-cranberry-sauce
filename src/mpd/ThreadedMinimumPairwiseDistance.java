@@ -61,8 +61,8 @@ public class ThreadedMinimumPairwiseDistance implements MinimumPairwiseDistance 
 
       public void run(){
 
-        for(int i = N/2; i < N; i++) {
-          for(int j = 0; j < i && i != j; j++) {
+        for(int i = (int) Math.floor(N/2); i < N/2; i++) {
+          for(int j = 0; j+N/2 < i; j++) {
             long diff = Math.abs((long) array[j]-array[i]);
             this.rightMin = Math.min(diff, this.rightMin);
           }
@@ -81,7 +81,7 @@ public class ThreadedMinimumPairwiseDistance implements MinimumPairwiseDistance 
       public void run(){
 
         for(int j = (int) Math.floor(N/2); j < N-1; j++) {
-          for(int i = (int) Math.floor(N/2)+1; i < N && i != j; i++) {
+          for(int i = j+1; i < N; i++) {
             long diff = Math.abs((long) array[j]-array[i]);
             this.topRightMin = Math.min(diff, this.topRightMin);
           }
@@ -99,8 +99,8 @@ public class ThreadedMinimumPairwiseDistance implements MinimumPairwiseDistance 
 
       public void run(){
 
-        for(int j = 0; j <= N/2; j++) {
-          for(int i = (int) Math.floor(N/2); i < N && i != j; i++) {
+        for(int j = 0; j < N/2; j++) {
+          for(int i = (int) Math.floor(N/2); i < j+N/2; i++) {
             long diff = Math.abs((long) array[j]-array[i]);
             this.centerMin = Math.min(diff, centerMin);
           }
